@@ -1,4 +1,3 @@
-print("hello world")
-print("ssvp")
-
-
+from tkinter import*
+root=Tk()
+root.mainloop()
