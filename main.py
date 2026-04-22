@@ -12,14 +12,14 @@ class Application :
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
 
-        self.H_page = tk.Frame(root, width=800, height=500, bg="#ffffff")
-        self.H_page.grid(row=0, column=0, sticky="nsew")
+        self.Home_page = tk.Frame(root, width=800, height=500, bg="#ffffff")
+        self.Home_page.grid(row=0, column=0, sticky="nsew")
 
         # Background image
         self.home_bg_image = Image.open("images/Bg1.png")  # Make sure this image is 900x600
         self.home_bg_image = self.home_bg_image.resize((1100, 700))
         self.bg_photo = ImageTk.PhotoImage(self.home_bg_image)
-        self.bg_label = tk.Label(self.H_page, image=self.bg_photo)
+        self.bg_label = tk.Label(self.Home_page, image=self.bg_photo)
         self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
 root = tk.Tk()
