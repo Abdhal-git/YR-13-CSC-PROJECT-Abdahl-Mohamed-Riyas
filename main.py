@@ -22,6 +22,18 @@ class Application :
         self.bg_label = tk.Label(self.Home_page, image=self.bg_photo)
         self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
+        # focus tracker
+        self.title_label = tk.Label(
+        self.Home_page,text="Focus Tracker",font=("Impact", 60),fg="black",bg=self.Home_page["bg"],  # match parent background
+   )
+        self.title_label.place(x=20, y=30)
+
+        # navigation buttons
+
+        self.nav_1 = tk.Button(
+        self.Home_page,text="Pomodoro",font=("Impact", 30),fg="black",)
+        self.nav_1.place(x=20, y=150)
+
 root = tk.Tk()
 app = Application(root)
 root.mainloop()
