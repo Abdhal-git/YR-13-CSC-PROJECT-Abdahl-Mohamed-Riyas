@@ -12,6 +12,7 @@ class Application :
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
 
+        #home page
         self.Home_page = tk.Frame(root, width=800, height=500, bg="#ffffff")
         self.Home_page.grid(row=0, column=0, sticky="nsew")
 
@@ -26,13 +27,16 @@ class Application :
         self.title_label = tk.Label(
         self.Home_page,text="Focus Tracker",font=("Impact", 60),fg="black",bg=self.Home_page["bg"],  # match parent background
    )
-        self.title_label.place(x=20, y=30)
+        self.title_label.place(relx=0.5,y=20, anchor="n")
 
-        # navigation buttons
+        #nav buttons
+        button_frame = tk.Frame(self.Home_page)
+        button_frame.place(x=50, y=150)
 
-        self.nav_1 = tk.Button(
-        self.Home_page,text="Pomodoro",font=("Impact", 30),fg="black",)
-        self.nav_1.place(x=20, y=150)
+        tk.Button(button_frame, text="Pomodoro",font=("Impact", 40)).pack(pady=5)
+        tk.Button(button_frame, text="Stopwatch",font=("Impact", 40)).pack(pady=5)
+        tk.Button(button_frame, text="Settings",font=("Impact", 40)).pack(pady=5)
+
 
 root = tk.Tk()
 app = Application(root)
