@@ -33,9 +33,24 @@ class Application :
         button_frame = tk.Frame(self.Home_page)
         button_frame.place(x=50, y=150)
 
-        tk.Button(button_frame, text="Pomodoro",font=("Impact", 40)).pack(pady=5)
+        tk.Button(button_frame, text="Pomodoro",font=("Impact", 40),command=self.open_pomo).pack(pady=5)
         tk.Button(button_frame, text="Stopwatch",font=("Impact", 40)).pack(pady=5)
         tk.Button(button_frame, text="Settings",font=("Impact", 40)).pack(pady=5)
+
+
+        #####
+
+        #Pomodoro page
+        self.Pomo_page = tk.Frame(root,bg="blue")
+        self.Pomo_page.grid(row=0, column=0, sticky="nsew")
+        tk.Button(self.Pomo_page, text="Stopwatch", font=("Impact", 40)).pack(pady=5)
+
+    def show_frame(self, frame):
+        frame.tkraise()
+    def open_pomo(self):
+        self.show_frame(self.Pomo_page)
+
+
 
 
 root = tk.Tk()
