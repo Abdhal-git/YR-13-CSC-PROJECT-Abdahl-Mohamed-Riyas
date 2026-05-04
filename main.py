@@ -2,8 +2,8 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 
-class Application :
-    def __init__(self,root):
+class Application:
+    def __init__(self, root):
         self.root = root
         self.root.title("Focus Tracker")
         self.root.geometry("1100x700")
@@ -12,47 +12,63 @@ class Application :
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
 
-        #home page
-        self.Home_page = tk.Frame(root, width=800, height=500, bg="#ffffff")
-        self.Home_page.grid(row=0, column=0, sticky="nsew")
+        #Store frames in a dictionary
+        self.frames = {}
 
-        # Background image
-        self.home_bg_image = Image.open("images/Bg1.png")  # Make sure this image is 900x600
-        self.home_bg_image = self.home_bg_image.resize((1100, 700))
-        self.bg_photo = ImageTk.PhotoImage(self.home_bg_image)
-        self.bg_label = tk.Label(self.Home_page, image=self.bg_photo)
-        self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+        #Create all pages
+        for I in (self.open_HME, self.open_POM, self.open_STO, self.open_SET):
+            frame = I()
+            self.frames[I.__name__] = frame
+            frame.grid(row=0, column=0, sticky="nsew")
 
-        # focus tracker
-        self.title_label = tk.Label(
-        self.Home_page,text="Focus Tracker",font=("Impact", 60),fg="black",bg=self.Home_page["bg"],  # match parent background
-   )
-        self.title_label.place(relx=0.5,y=20, anchor="n")
+        #Show home first
+        self.show_frame("open_HME")
 
-        #nav buttons
-        button_frame = tk.Frame(self.Home_page)
+    def show_frame(self, page_name):
+        frame = self.frames[page_name]
+        frame.tkraise()
+
+    # HOME PAGE
+    def open_HME(self):
+        frame = tk.Frame(self.root, bg="yellow")
+        title = tk.Label(frame, text="Focus Tracker", font=("Impact", 60), bg="yellow")
+        title.place(relx=0.5, y=20, anchor="n")
+
+        #BUTTONS
+        button_frame = tk.Frame(frame, bg="#ffffff")
         button_frame.place(x=50, y=150)
 
-        tk.Button(button_frame, text="Pomodoro",font=("Impact", 40),command=self.open_pomo).pack(pady=5)
-        tk.Button(button_frame, text="Stopwatch",font=("Impact", 40)).pack(pady=5)
-        tk.Button(button_frame, text="Settings",font=("Impact", 40)).pack(pady=5)
+        tk.Button(button_frame, text="Pomodoro", font=("Impact", 30),command=lambda: self.show_frame("open_POM")).pack(pady=10)
+        tk.Button(button_frame, text="Stopwatch", font=("Impact", 30),command=lambda: self.show_frame("open_STO")).pack(pady=10)
+        tk.Button(button_frame, text="Settings", font=("Impact", 30),command=lambda: self.show_frame("open_SET")).pack(pady=10)
+        return frame
+
+    #POMODORO
+    def open_POM(self):
+        frame = tk.Frame(self.root, bg="blue")
+        tk.Label(frame, text="Pomodoro", font=("Impact", 40), bg="blue").pack(pady=20)
+        tk.Button(frame, text="Back", font=("Impact", 20),command=lambda: self.show_frame("open_HME")).pack()
+        return frame
+
+    #STOPWATCH
+    def open_STO(self):
+        frame = tk.Frame(self.root, bg="green")
+        tk.Label(frame, text="Stopwatch", font=("Impact", 40), bg="green").pack(pady=20)
+        tk.Button(frame, text="Back", font=("Impact", 20),command=lambda: self.show_frame("open_HME")).pack()
+        return frame
+
+    #SETTINGS
+    def open_SET(self):
+        frame = tk.Frame(self.root, bg="red")
+        tk.Label(frame, text="Settings", font=("Impact", 40), bg="red").pack(pady=20)
+        tk.Button(frame, text="Back", font=("Impact", 20),command=lambda: self.show_frame("open_HME")).pack()
+        return frame
 
 
-        #####
-
-        #Pomodoro page
-        self.Pomo_page = tk.Frame(root,bg="blue")
-        self.Pomo_page.grid(row=0, column=0, sticky="nsew")
-        tk.Button(self.Pomo_page, text="Stopwatch", font=("Impact", 40)).pack(pady=5)
-
-    def show_frame(self, frame):
-        frame.tkraise()
-    def open_pomo(self):
-        self.show_frame(self.Pomo_page)
 
 
 
-
+# Run app
 root = tk.Tk()
 app = Application(root)
 root.mainloop()
