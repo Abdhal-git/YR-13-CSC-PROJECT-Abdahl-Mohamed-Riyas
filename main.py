@@ -45,35 +45,35 @@ class Application:
 
     #POMODORO#
     def open_POM(self):
-        frame = tk.Frame(self.root, bg="blue")
+        frame = tk.Frame(self.root, bg="black")
         frame.grid_columnconfigure(0, weight=1)
 
-        tk.Label(frame, text="POMODORO", font=("Impact", 70), bg="blue") \
+        tk.Label(frame, text="POMODORO", font=("Impact", 70), bg="black",fg="white") \
             .grid(row=0, column=0, pady=20)
 
         #BUTTONS#
-        button_frame = tk.Frame(frame, bg="blue")
+        button_frame = tk.Frame(frame, bg="black")
         button_frame.grid(row=1, column=0)
 
-        tk.Button(button_frame, text="LONG BREAK", font=("Impact", 40),command=lambda: self.show_frame("open_HME")).grid(row=0, column=0, padx=10)
-        tk.Button(button_frame, text="SHORT BREAK", font=("Impact",40),command=lambda: self.show_frame("open_HME")).grid(row=0, column=1, padx=10)
-        tk.Button(button_frame, text="BACK", font=("Impact", 40),command=lambda: self.show_frame("open_HME")).grid(row=0, column=2, padx=10)
+        tk.Button(button_frame, text="LONG BREAK", font=("Impact", 40),bg="black",fg="white",command=lambda: self.show_frame("open_HME")).grid(row=0, column=0, padx=10)
+        tk.Button(button_frame, text="SHORT BREAK", font=("Impact",40),bg="black",fg="white",command=lambda: self.show_frame("open_HME")).grid(row=0, column=1, padx=10)
+        tk.Button(button_frame, text="BACK", font=("Impact", 40),bg="black",fg="white",command=lambda: self.show_frame("open_HME")).grid(row=0, column=2, padx=10)
 
         return frame
 
     #STOPWATCH#
     def open_STO(self):
-        frame = tk.Frame(self.root, bg="green")
-        tk.Label(frame, text="Stopwatch", font=("Impact", 40), bg="green").pack(pady=20)
+        frame = tk.Frame(self.root, bg="black")
+        tk.Label(frame, text="Stopwatch", font=("Impact", 40),bg="black",fg="white").pack(pady=20)
 
-        tk.Button(frame, text="Back", font=("Impact", 20),command=lambda: self.show_frame("open_HME")).pack()
+        tk.Button(frame, text="Back", font=("Impact", 20),bg="black",fg="white",command=lambda: self.show_frame("open_HME")).pack()
         return frame
 
     #SETTINGS#
     def open_SET(self):
-        frame = tk.Frame(self.root, bg="red")
-        tk.Label(frame, text="Settings", font=("Impact", 40), bg="red").pack(pady=20)
-        tk.Button(frame, text="Back", font=("Impact", 20),command=lambda: self.show_frame("open_HME")).pack()
+        frame = tk.Frame(self.root, bg="black")
+        tk.Label(frame, text="Settings", font=("Impact", 40),bg="black",fg="white").pack(pady=20)
+        tk.Button(frame, text="Back", font=("Impact", 20),bg="black",fg="white",command=lambda: self.show_frame("open_HME")).pack()
         return frame
 
 
