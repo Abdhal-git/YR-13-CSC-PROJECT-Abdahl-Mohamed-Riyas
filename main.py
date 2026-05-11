@@ -43,23 +43,61 @@ class Application:
         tk.Button(button_frame, text="  SETTINGS ", font=("Impact", 40),bg="black",fg="white",command=lambda: self.show_frame("open_SET")).pack(fill="x",pady=10)
         return frame
 
-    #POMODORO#
+    # POMODORO #
     def open_POM(self):
         frame = tk.Frame(self.root, bg="black")
         frame.grid_columnconfigure(0, weight=1)
 
-        tk.Label(frame, text="POMODORO", font=("Impact", 70), bg="black",fg="white") \
-            .grid(row=0, column=0, pady=20)
 
-        #BUTTONS#
+        tk.Label(frame,text="POMODORO",font=("Impact", 70),bg="black",fg="white").grid(row=0, column=0, pady=20)
+        tk.Label(frame, text="helloo",
+                 font=("Impact", 70), bg="black", fg="white").grid(row=3, column=0, pady=20)
+
+        # BUTTON FRAME
         button_frame = tk.Frame(frame, bg="black")
         button_frame.grid(row=1, column=0)
 
-        tk.Button(button_frame, text="LONG BREAK", font=("Impact", 40),bg="black",fg="white",command=lambda: self.show_frame("open_HME")).grid(row=0, column=0, padx=10)
-        tk.Button(button_frame, text="SHORT BREAK", font=("Impact",40),bg="black",fg="white",command=lambda: self.show_frame("open_HME")).grid(row=0, column=1, padx=10)
-        tk.Button(button_frame, text="BACK", font=("Impact", 40),bg="black",fg="white",command=lambda: self.show_frame("open_HME")).grid(row=0, column=2, padx=10)
+        # CONTENT FRAME
+        content_frame = tk.Frame(frame, bg="black")
+        content_frame.grid(row=2, column=0)
+
+        # SHORT BREAK FRAME
+        short_frame = tk.Frame(content_frame,bg="blue",width=1100,height=700)
+        short_frame.grid_propagate(False)
+        tk.Label(short_frame,text="SHORT BREAK",font=("Impact", 40),bg="blue",fg="white").place(relx=0.5, rely=0.5, anchor="center")
+
+        # LONG BREAK FRAME
+        long_frame = tk.Frame(content_frame,bg="green",width=1100,height=700)
+        long_frame.grid_propagate(False)
+        tk.Label(long_frame,text="LONG BREAK",font=("Impact", 40),bg="green",fg="white").place(relx=0.5, rely=0.5, anchor="center")
+
+        # FUNCTIONS
+        def show_short():
+            button_frame.grid_forget()
+            long_frame.grid_forget()
+            short_frame.grid(row=0, column=0, sticky="nsew")
+
+        def show_long():
+            button_frame.grid_forget()
+            short_frame.grid_forget()
+            long_frame.grid(row=0, column=0, sticky="nsew")
+
+        def go_back():
+            short_frame.grid_forget()
+            long_frame.grid_forget()
+            button_frame.grid(row=1, column=0)
+
+        # BACK BUTTONS
+        tk.Button(short_frame,text="BACK",font=("Impact", 20),bg="black",fg="white",command=go_back).place(x=20, y=20)
+        tk.Button(long_frame,text="BACK",font=("Impact", 20),bg="black",fg="white",command=go_back).place(x=20, y=20)
+
+        # MAIN BUTTONS
+        tk.Button(button_frame,text="LONG BREAK",font=("Impact", 40),bg="black",fg="white",command=show_long).grid(row=0, column=1, padx=10)
+        tk.Button(button_frame,text="SHORT BREAK",font=("Impact", 40),bg="black",fg="white",command=show_short).grid(row=0, column=2, padx=10)
 
         return frame
+
+
 
     #STOPWATCH#
     def open_STO(self):
