@@ -50,6 +50,8 @@ class Application:
     def open_POM(self):
             frame = tk.Frame(self.root, bg="black")
             tk.Label(frame, text="POMODORO TIMER", font=("Impact", 40), bg="black", fg="white").pack(pady=15)
+            tk.Button(frame, text="Back", font=("Impact", 20), bg="black", fg="white",
+                      command=lambda: self.show_frame("open_HME")).pack()
 
             Pomodoro_container = tk.Frame(frame, bg="black")
             Pomodoro_container.pack(fill="both", expand=True, padx=20, pady=10)
