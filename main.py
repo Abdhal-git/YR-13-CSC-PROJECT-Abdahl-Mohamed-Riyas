@@ -49,41 +49,44 @@ class Application:
         # POMODORO #
     def open_POM(self):
             frame = tk.Frame(self.root, bg="black")
-            tk.Label(frame, text="POMODORO TIMER", font=("Impact", 40), bg="black", fg="white").pack(pady=15)
-            tk.Button(frame, text="Back", font=("Impact", 20), bg="black", fg="white",
-                      command=lambda: self.show_frame("open_HME")).pack()
+            top_bar = tk.Frame(frame, bg="black")
+            top_bar.pack( fill="x",pady=25)
+            tk.Button(top_bar, text="Back", font=("Impact", 25), bg="black", fg="white",command=lambda: self.show_frame("open_HME")).pack(side="right", padx=20,fill="x")
+            tk.Label(top_bar, text="   POMODORO TIMER", font=("Impact", 50), bg="black", fg="white").pack(side="left", padx=10,fill="x")
+
+
 
             Pomodoro_container = tk.Frame(frame, bg="black")
-            Pomodoro_container.pack(fill="both", expand=True, padx=20, pady=10)
+            Pomodoro_container.pack(fill="both", expand=True, padx=20)
 
             # LEFT INNER FRAME
-            left_frame = tk.Frame(Pomodoro_container, bg="#1a1a1a", highlightbackground="#333333", highlightthickness=2)
-            left_frame.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+            left_frame = tk.Frame(Pomodoro_container, bg="black")
+            left_frame.pack(side="left", fill="both", expand=True, padx=10)
 
-            tk.Label(left_frame, text="Pomodoro Timer Display", font=("Impact", 24), bg="#1a1a1a", fg="#ff4444").pack(pady=30)
-            tk.Label(left_frame, text="[ 25:00 ]", font=("Impact", 60), bg="#1a1a1a", fg="white").pack(pady=10)
+            tk.Label(left_frame, text="Pomodoro Timer", font=("Impact", 30), bg="black", fg="#ff4444").pack(pady=30)
+            tk.Label(left_frame, text="[ 25:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
 
             #Target Button to open the deep sub-screen
             tk.Button(left_frame, text="View Details", font=("Arial", 14, "bold"), bg="red", fg="white",command=lambda: self.show_frame("open_POM_DET")).pack(pady=10)
 
 
             # CENTRE INNER FRAME
-            center_frame = tk.Frame(Pomodoro_container, bg="#1a1a1a", highlightbackground="#333333",highlightthickness=2)
-            center_frame.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+            center_frame = tk.Frame(Pomodoro_container, bg="black")
+            center_frame.pack(side="left", fill="both", expand=True, padx=10)
 
-            tk.Label(center_frame, text="Short Break Display", font=("Impact", 24), bg="#1a1a1a", fg="#ff4444").pack(pady=30)
-            tk.Label(center_frame, text="[ 05:00 ]", font=("Impact", 60), bg="#1a1a1a", fg="white").pack(pady=10)
+            tk.Label(center_frame, text="Short Break", font=("Impact",30), bg="black", fg="#ff4444").pack(pady=30)
+            tk.Label(center_frame, text="[ 05:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
 
             # Target Button to open the deep sub-screen
             tk.Button(center_frame, text="View Details", font=("Arial", 14, "bold"), bg="red", fg="white",command=lambda: self.show_frame("open_SB_DET")).pack(pady=10)
 
 
             # RIGHT INNER FRAME
-            right_frame = tk.Frame(Pomodoro_container, bg="#1a1a1a", highlightbackground="#333333",highlightthickness=2)
-            right_frame.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+            right_frame = tk.Frame(Pomodoro_container, bg="black")
+            right_frame.pack(side="left", fill="both", expand=True, padx=10)
 
-            tk.Label(right_frame, text="Long Break Display", font=("Impact", 24), bg="#1a1a1a", fg="#ff4444").pack(pady=30)
-            tk.Label(right_frame, text="[ 10:00 ]", font=("Impact", 60), bg="#1a1a1a", fg="white").pack(pady=10)
+            tk.Label(right_frame, text="Long Break ", font=("Impact",30), bg="black", fg="#ff4444").pack(pady=30)
+            tk.Label(right_frame, text="[ 10:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
 
             # Target Button to open the deep sub-screen
             tk.Button(right_frame, text="View Details", font=("Arial", 14, "bold"), bg="red", fg="white",command=lambda: self.show_frame("open_LB_DET")).pack(pady=10)
@@ -95,7 +98,7 @@ class Application:
     def open_POM_DET(self):
             frame = tk.Frame(self.root, bg="black")
             tk.Label(frame, text="POMODORO DETAILED VIEW", font=("Impact", 40), bg="black", fg="red").pack(pady=20)
-            tk.Label(frame, text="This is the specific inner screen you requested.",font=("Arial", 20), bg="black", fg="white").pack(pady=100)
+            tk.Label(frame, text="Needs to workout the things like timer and adjust settings here ",font=("Arial", 20), bg="black", fg="white").pack(pady=100)
 
             # Back button returns explicitly to Pomodoro main view instead of Main Menu
             tk.Button(frame, text="← Back to Pomodoro", font=("Impact", 20), bg="#333333", fg="white",command=lambda: self.show_frame("open_POM")).pack(pady=20)
@@ -105,7 +108,7 @@ class Application:
     def open_SB_DET(self):
             frame = tk.Frame(self.root, bg="black")
             tk.Label(frame, text="SHORT BREAK DETAILED VIEW", font=("Impact", 40), bg="black", fg="red").pack(pady=20)
-            tk.Label(frame, text="This is the specific inner screen you requested.",font=("Arial", 20), bg="black", fg="white").pack(pady=100)
+            tk.Label(frame, text="Needs to workout the things like timer and adjust settings here",font=("Arial", 20), bg="black", fg="white").pack(pady=100)
 
             # Back button returns explicitly to Pomodoro main view instead of Main Menu
             tk.Button(frame, text="← Back to Pomodoro", font=("Impact", 20), bg="#333333", fg="white",command=lambda: self.show_frame("open_POM")).pack(pady=20)
@@ -115,7 +118,7 @@ class Application:
     def open_LB_DET(self):
             frame = tk.Frame(self.root, bg="black")
             tk.Label(frame, text="LONG BREAK DETAILED VIEW", font=("Impact", 40), bg="black", fg="red").pack(pady=20)
-            tk.Label(frame, text="This is the specific inner screen you requested.",font=("Arial", 20), bg="black", fg="white").pack(pady=100)
+            tk.Label(frame, text="Needs to workout the things like timer and adjust settings here",font=("Arial", 20), bg="black", fg="white").pack(pady=100)
 
             # Back button returns explicitly to Pomodoro main view instead of Main Menu
             tk.Button(frame, text="← Back to Pomodoro", font=("Impact", 20), bg="#333333", fg="white",command=lambda: self.show_frame("open_POM")).pack(pady=20)
@@ -123,27 +126,27 @@ class Application:
             return frame
 
 
-
-
         # STOPWATCH#
     def open_STO(self):
-            frame = tk.Frame(self.root, bg="black")
-            tk.Label(frame, text="Stopwatch", font=("Impact", 40), bg="black", fg="white").pack(pady=20)
-            (tk.Label(frame, text="You are here in stopwatch timer page ", font=("Impact", 40), bg="black", fg="white")
-             .pack(pady=200))
-            tk.Button(frame, text="Back", font=("Impact", 20), bg="black", fg="white",
-                      command=lambda: self.show_frame("open_HME")).pack()
-            return frame
+        frame = tk.Frame(self.root, bg="black")
+        top_bar = tk.Frame(frame, bg="black")
+        top_bar.pack(fill="x", pady=25)
+        tk.Button(top_bar, text="Back", font=("Impact", 25), bg="black", fg="white",
+                  command=lambda: self.show_frame("open_HME")).pack(side="right", padx=20, fill="x")
+        tk.Label(top_bar, text="   STOPWATCH", font=("Impact", 50), bg="black", fg="white").pack(side="left",padx=10, fill="x")
+
+
+        return frame
 
         # SETTINGS#
     def open_SET(self):
-            frame = tk.Frame(self.root, bg="black")
-            tk.Label(frame, text="Settings", font=("Impact", 40), bg="black", fg="white").pack(pady=20)
-            (tk.Label(frame, text="You are here in settings page ", font=("Impact", 40), bg="black", fg="white")
-             .pack(pady=200))
-            tk.Button(frame, text="Back", font=("Impact", 20), bg="black", fg="white",
-                      command=lambda: self.show_frame("open_HME")).pack()
-            return frame
+        frame = tk.Frame(self.root, bg="black")
+        top_bar = tk.Frame(frame, bg="black")
+        top_bar.pack(fill="x", pady=25)
+        tk.Button(top_bar, text="Back", font=("Impact", 25), bg="black", fg="white",command=lambda: self.show_frame("open_HME")).pack(side="right", padx=20, fill="x")
+        tk.Label(top_bar, text="   SETTINGS", font=("Impact", 50), bg="black", fg="white").pack(side="left", padx=10,
+                                                                                                 fill="x")
+        return frame
 
 # Run app
 root = tk.Tk()
