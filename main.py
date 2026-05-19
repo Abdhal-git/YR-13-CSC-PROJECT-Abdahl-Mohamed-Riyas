@@ -33,21 +33,21 @@ class Application:
         # HOME PAGE#
     def open_HME(self):
             frame = tk.Frame(self.root, bg="black")
-            pil_img = Image.open("images/logos.jpg")
+            pil_img = Image.open("images/head_logo.jpg")
             pil_img_resized = pil_img.resize((100, 100))
             self.logo_img = ImageTk.PhotoImage(pil_img_resized)
 
-            pil_pomo = Image.open("images/logosp.jpg")  # Change to your filename
+            pil_pomo = Image.open("images/stop_logo.jpg")  # Change to your filename
             pil_pomo_resized = pil_pomo.resize((45, 45))
             self.pomo_img = ImageTk.PhotoImage(pil_pomo_resized)
 
             # Load and resize Stopwatch Icon
-            pil_stop = Image.open("images/logost.jpg")  # Change to your filename
+            pil_stop = Image.open("images/sett_logo.jpg")  # Change to your filename
             pil_stop_resized = pil_stop.resize((45, 45), Image.Resampling.LANCZOS)
             self.stop_img = ImageTk.PhotoImage(pil_stop_resized)
 
             # Load and resize Settings Icon
-            pil_set = Image.open("images/logose.jpg")  # Change to your filename
+            pil_set = Image.open("images/pomo_logo.jpg")  # Change to your filename
             pil_set_resized = pil_set.resize((45, 45), Image.Resampling.LANCZOS)
             self.set_img = ImageTk.PhotoImage(pil_set_resized)
 
@@ -83,7 +83,7 @@ class Application:
 
             # LEFT INNER FRAME
             left_frame = tk.Frame(Pomodoro_container, bg="black")
-            left_frame.pack(side="left", fill="both", expand=True, padx=10)
+            left_frame.pack(side="left", fill="both", expand=True, padx=10,)
 
             tk.Label(left_frame, text="Pomodoro Timer", font=("Impact", 30), bg="black", fg="#ff4444").pack(pady=30)
             tk.Label(left_frame, text="[ 25:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
