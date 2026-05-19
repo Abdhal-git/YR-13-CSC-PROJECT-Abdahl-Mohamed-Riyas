@@ -1,6 +1,8 @@
 
 
 import tkinter as tk
+from PIL import Image, ImageTk
+
 
 class Application:
     def __init__(self, root):
@@ -31,18 +33,38 @@ class Application:
         # HOME PAGE#
     def open_HME(self):
             frame = tk.Frame(self.root, bg="black")
-            title = tk.Label(frame, text="FOCUS TRACKER", font=("Impact", 70), bg="black", fg="white")
+            pil_img = Image.open("images/logos.jpg")
+            pil_img_resized = pil_img.resize((100, 100))
+            self.logo_img = ImageTk.PhotoImage(pil_img_resized)
+
+            pil_pomo = Image.open("images/logosp.jpg")  # Change to your filename
+            pil_pomo_resized = pil_pomo.resize((45, 45))
+            self.pomo_img = ImageTk.PhotoImage(pil_pomo_resized)
+
+            # Load and resize Stopwatch Icon
+            pil_stop = Image.open("images/logost.jpg")  # Change to your filename
+            pil_stop_resized = pil_stop.resize((45, 45), Image.Resampling.LANCZOS)
+            self.stop_img = ImageTk.PhotoImage(pil_stop_resized)
+
+            # Load and resize Settings Icon
+            pil_set = Image.open("images/logose.jpg")  # Change to your filename
+            pil_set_resized = pil_set.resize((45, 45), Image.Resampling.LANCZOS)
+            self.set_img = ImageTk.PhotoImage(pil_set_resized)
+
+
+            title = tk.Label(frame, text="FOCUS TRACKER ", image=self.logo_img,
+                             compound="right", font=("Impact", 70), bg="black", fg="white")
             title.place(relx=0.5, y=20, anchor="n")
 
             # BUTTONS#
             button_frame = tk.Frame(frame, bg="black")
             button_frame.pack(expand=True)
 
-            tk.Button(button_frame, text="  POMODORO ", font=("Impact", 40), bg="black", fg="white",
+            tk.Button(button_frame, text="  POMODORO ", image=self.pomo_img, compound="right",font=("Impact", 40), bg="black", fg="white",
                       command=lambda: self.show_frame("open_POM")).pack(fill="x", pady=10)
-            tk.Button(button_frame, text="  STOPWATCH", font=("Impact", 40), bg="black", fg="white",
+            tk.Button(button_frame, text="  STOPWATCH", image=self.stop_img, compound="right",font=("Impact", 40), bg="black", fg="white",
                       command=lambda: self.show_frame("open_STO")).pack(fill="x", pady=10)
-            tk.Button(button_frame, text="  SETTINGS ", font=("Impact", 40), bg="black", fg="white",
+            tk.Button(button_frame, text="  SETTINGS ", image=self.set_img, compound="right",font=("Impact", 40), bg="black", fg="white",
                       command=lambda: self.show_frame("open_SET")).pack(fill="x", pady=10)
             return frame
 
