@@ -37,18 +37,18 @@ class Application:
             pil_img_resized = pil_img.resize((100, 100))
             self.logo_img = ImageTk.PhotoImage(pil_img_resized)
 
-            pil_pomo = Image.open("images/stop_logo.jpg")  # Change to your filename
+            pil_pomo = Image.open("images/stop_logo.jpg")
             pil_pomo_resized = pil_pomo.resize((45, 45))
             self.pomo_img = ImageTk.PhotoImage(pil_pomo_resized)
 
-            # Load and resize Stopwatch Icon
-            pil_stop = Image.open("images/sett_logo.jpg")  # Change to your filename
-            pil_stop_resized = pil_stop.resize((45, 45), Image.Resampling.LANCZOS)
+
+            pil_stop = Image.open("images/sett_logo.jpg")
+            pil_stop_resized = pil_stop.resize((45, 45))
             self.stop_img = ImageTk.PhotoImage(pil_stop_resized)
 
-            # Load and resize Settings Icon
-            pil_set = Image.open("images/pomo_logo.jpg")  # Change to your filename
-            pil_set_resized = pil_set.resize((45, 45), Image.Resampling.LANCZOS)
+
+            pil_set = Image.open("images/pomo_logo.jpg")
+            pil_set_resized = pil_set.resize((45, 45))
             self.set_img = ImageTk.PhotoImage(pil_set_resized)
 
 
@@ -155,9 +155,48 @@ class Application:
         top_bar.pack(fill="x", pady=25)
         tk.Button(top_bar, text="BACK", font=("Impact", 25), bg="black", fg="white",activebackground="red",activeforeground="white",command=lambda: self.show_frame("open_HME")).pack(side="right", padx=20, fill="x")
         tk.Label(top_bar, text="   STOPWATCH", font=("Impact", 50), bg="black", fg="white").pack(side="left",padx=10, fill="x")
+        tk.Label(frame, text="[ 00 : 00 ] ", font=("Impact", 120),
+                 bg="black", fg="white").pack(pady=80)
+
+        stopwatch_container = tk.Frame(frame, bg="black")
+        stopwatch_container.pack(fill="both", expand=True, padx=20)
+
+        pil_pau = Image.open("images/pause.jpg")
+        pil_pau_resized = pil_pau.resize((100, 100))
+        self.pau_img = ImageTk.PhotoImage(pil_pau_resized)
+
+        pil_stp = Image.open("images/resume.jpg")
+        pil_stp_resized = pil_stp.resize((100, 100))
+        self.stp_img = ImageTk.PhotoImage(pil_stp_resized)
+
+        pil_res = Image.open("images/reset.jpg")
+        pil_res_resized = pil_res.resize((100, 100))
+        self.res_img = ImageTk.PhotoImage(pil_res_resized)
+
+        # LEFT INNER FRAME
+        left_frame = tk.Frame(stopwatch_container, bg="black")
+        left_frame.pack(side="left", fill="both", expand=True, padx=10, )
+
+        tk.Button(left_frame,image=self.pau_img).pack(pady=20)
+
+        # CENTRE INNER FRAME
+        center_frame = tk.Frame(stopwatch_container, bg="black")
+        center_frame.pack(side="left", fill="both", expand=True, padx=10)
+        tk.Button(center_frame, image=self.stp_img).pack(pady=20)
+
+
+        # RIGHT INNER FRAME
+        right_frame = tk.Frame(stopwatch_container, bg="black")
+        right_frame.pack(side="left", fill="both", expand=True, padx=10)
+
+
+        tk.Button(right_frame,  image=self.res_img).pack(pady=20)
 
 
         return frame
+
+
+
 
         # SETTINGS#
     def open_SET(self):
