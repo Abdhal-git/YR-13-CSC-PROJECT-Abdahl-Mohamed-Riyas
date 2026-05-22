@@ -148,19 +148,42 @@ class Application:
             return frame
 
 
+
+
+
+
+
+
         # STOPWATCH#
     def open_STO(self):
+
+        # Initialize stopwatch instance variables if they don't exist
+        if not hasattr(self, "running"):
+            self.running = False
+            self.counter = 0
+
         frame = tk.Frame(self.root, bg="black")
         top_bar = tk.Frame(frame, bg="black")
         top_bar.pack(fill="x", pady=25)
-        tk.Button(top_bar, text="BACK", font=("Impact", 25), bg="black", fg="white",activebackground="red",activeforeground="white",command=lambda: self.show_frame("open_HME")).pack(side="right", padx=20, fill="x")
-        tk.Label(top_bar, text="   STOPWATCH", font=("Impact", 50), bg="black", fg="white").pack(side="left",padx=10, fill="x")
-        tk.Label(frame, text="[ 00 : 00 ] ", font=("Impact", 120),
-                 bg="black", fg="white").pack(pady=80)
 
+        tk.Button(top_bar, text="BACK", font=("Impact", 25), bg="black", fg="white",
+                  activebackground="red", activeforeground="white",
+                  command=lambda: [self.stop_stopwatch(), self.show_frame("open_HME")]).pack(side="right", padx=20,
+                                                                                             fill="x")
+
+        tk.Label(top_bar, text="   STOPWATCH", font=("Impact", 50), bg="black", fg="white").pack(side="left", padx=10,
+                                                                                                 fill="x")
+
+       #step1 neeed to create a label
+        self.stopwatch_label = tk.Label(frame, text="00 : 00 : 00 ", font=("Impact", 120), bg="black", fg="red")
+        self.stopwatch_label.pack(pady=80)
+
+       #step2 need to create buttons (start , stop, reset) ive created using images
+        #make sure the command for is included
         stopwatch_container = tk.Frame(frame, bg="black")
         stopwatch_container.pack(fill="both", expand=True, padx=20)
 
+        # Load images
         pil_pau = Image.open("images/pause.jpg")
         pil_pau_resized = pil_pau.resize((100, 100))
         self.pau_img = ImageTk.PhotoImage(pil_pau_resized)
@@ -173,27 +196,81 @@ class Application:
         pil_res_resized = pil_res.resize((100, 100))
         self.res_img = ImageTk.PhotoImage(pil_res_resized)
 
-        # LEFT INNER FRAME
+        # LEFT INNER FRAME (Pause)
         left_frame = tk.Frame(stopwatch_container, bg="black")
-        left_frame.pack(side="left", fill="both", expand=True, padx=10, )
+        left_frame.pack(side="left", fill="both", expand=True, padx=10)
+        tk.Button(left_frame, image=self.pau_img, bg="black", activebackground="black",
+                  command=self.pause_stopwatch).pack(pady=20)
 
-        tk.Button(left_frame,image=self.pau_img).pack(pady=20)
-
-        # CENTRE INNER FRAME
+        # CENTRE INNER FRAME (Start / Resume)
         center_frame = tk.Frame(stopwatch_container, bg="black")
         center_frame.pack(side="left", fill="both", expand=True, padx=10)
-        tk.Button(center_frame, image=self.stp_img).pack(pady=20)
+        tk.Button(center_frame, image=self.stp_img, bg="black", activebackground="black",
+                  command=self.start_stopwatch).pack(pady=20)
 
-
-        # RIGHT INNER FRAME
+        # RIGHT INNER FRAME (Reset)
         right_frame = tk.Frame(stopwatch_container, bg="black")
         right_frame.pack(side="left", fill="both", expand=True, padx=10)
+        tk.Button(right_frame, image=self.res_img, bg="black", activebackground="black",
+                  command=self.reset_stopwatch).pack(pady=20)
 
-
-        tk.Button(right_frame,  image=self.res_img).pack(pady=20)
-
+        # If it was already running when returning to the frame, resume UI updates
+        if self.running:
+            self.update_stopwatch_label()
 
         return frame
+
+    # --- Stopwatch Logic Methods ---
+
+    def update_stopwatch_label(self):
+
+        if self.running:
+        #m= minutes, s= seconds , h= hours
+        #60 means the limit if the for example seconds reach the 60 it in m it will be if m reach 60 the hour will be 1
+            m, s = divmod(self.counter, 60)
+            h, m = divmod(m, 60)
+            display = f"{h:02d} : {m:02d} : {s:02d}"
+
+            # Safely update label if the frame hasn't been destroyed by using the  hasattr
+            #setting how fast the timer needs to run like in milliseconds
+            #counter needs to be get increased by 1
+            if hasattr(self, 'stopwatch_label') and self.stopwatch_label.winfo_exists():
+                self.stopwatch_label.config(text=display)
+                self.stopwatch_label.after(100, self.update_stopwatch_label)
+                self.counter +=1
+
+    def start_stopwatch(self):
+        if not self.running:
+            self.running = True
+            self.update_stopwatch_label()
+
+    def pause_stopwatch(self):
+        self.running = False
+
+    def stop_stopwatch(self):
+        # Stops calculation completely (used when leaving the page)
+        self.running = False
+
+    def reset_stopwatch(self):
+        self.running = False
+        self.counter = 0
+        if hasattr(self, 'stopwatch_label') and self.stopwatch_label.winfo_exists():
+            self.stopwatch_label.config(text="00 : 00 : 00")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
