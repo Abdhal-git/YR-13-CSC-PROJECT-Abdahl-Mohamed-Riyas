@@ -14,6 +14,11 @@ class Application:
             self.root.grid_rowconfigure(0, weight=1)
             self.root.grid_columnconfigure(0, weight=1)
 
+            #step 001 # --- Timer Logic State Variables ---
+            self.pomo_running = False  # Tracks if the countdown is active (True) or paused (False)
+            self.pomo_counter = 0  # Stores the remaining time in total seconds
+            self.current_timer_mode = None  # Tracks which screen is active: "POM", "SB", or "LB"
+
             # Store frames in a dictionary#
             self.frames = {}
 
@@ -89,7 +94,7 @@ class Application:
             tk.Label(left_frame, text="[ 25:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
 
             #Target Button to open the deep sub-screen
-            tk.Button(left_frame, text="FULL VIEW", font=("Arial", 14, "bold"), bg="red", fg="white",command=lambda: self.show_frame("open_POM_DET")).pack(pady=10)
+            tk.Button(left_frame, text="FULL VIEW", font=("Arial", 14, "bold"), bg="red", fg="white",command=lambda: self.setup_and_open_timer("POM", 25 * 60, "open_POM_DET")).pack(pady=10)
 
 
             # CENTRE INNER FRAME
@@ -100,7 +105,7 @@ class Application:
             tk.Label(center_frame, text="[ 05:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
 
             # Target Button to open the deep sub-screen
-            tk.Button(center_frame, text="FULL VIEW", font=("Arial", 14, "bold"), bg="red", fg="white",command=lambda: self.show_frame("open_SB_DET")).pack(pady=10)
+            tk.Button(center_frame, text="FULL VIEW", font=("Arial", 14, "bold"), bg="red", fg="white",command=lambda: self.setup_and_open_timer("SB", 5 * 60, "open_SB_DET")).pack(pady=10)
 
 
             # RIGHT INNER FRAME
@@ -111,7 +116,7 @@ class Application:
             tk.Label(right_frame, text="[ 10:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
 
             # Target Button to open the deep sub-screen
-            tk.Button(right_frame, text="FULL VIEW", font=("Arial", 14, "bold"), bg="red", fg="white",command=lambda: self.show_frame("open_LB_DET")).pack(pady=10)
+            tk.Button(right_frame, text="FULL VIEW", font=("Arial", 14, "bold"), bg="red", fg="white",command=lambda: self.setup_and_open_timer("LB", 10 * 60, "open_LB_DET")).pack(pady=10)
 
             return frame
 
@@ -174,11 +179,11 @@ class Application:
         tk.Label(top_bar, text="   STOPWATCH", font=("Impact", 50), bg="black", fg="white").pack(side="left", padx=10,
                                                                                                  fill="x")
 
-       #step1 neeed to create a label
+       # create a label
         self.stopwatch_label = tk.Label(frame, text="00 : 00 : 00 ", font=("Impact", 120), bg="black", fg="red")
         self.stopwatch_label.pack(pady=80)
 
-       #step2 need to create buttons (start , stop, reset) ive created using images
+       # create buttons (start , stop, reset) ive created using images
         #make sure the command for is included
         stopwatch_container = tk.Frame(frame, bg="black")
         stopwatch_container.pack(fill="both", expand=True, padx=20)
@@ -236,7 +241,7 @@ class Application:
             #counter needs to be get increased by 1
             if hasattr(self, 'stopwatch_label') and self.stopwatch_label.winfo_exists():
                 self.stopwatch_label.config(text=display)
-                self.stopwatch_label.after(100, self.update_stopwatch_label)
+                self.stopwatch_label.after(1000, self.update_stopwatch_label)
                 self.counter +=1
 
     def start_stopwatch(self):
@@ -256,6 +261,39 @@ class Application:
         self.counter = 0
         if hasattr(self, 'stopwatch_label') and self.stopwatch_label.winfo_exists():
             self.stopwatch_label.config(text="00 : 00 : 00")
+
+
+
+
+    #step 002 #
+    def update_pomo_display_text(self):
+            # 1. This splits your total seconds into minutes (m) and remaining seconds (s)
+            m, s = divmod(self.pomo_counter, 60)
+
+            # 2. This formats them nicely so '5' looks like '05'
+            display = f"{m:02d} : {s:02d}"
+
+            # 3. This checks which screen you are looking at, and updates the correct text label
+            if self.current_timer_mode == "POM" and hasattr(self, 'pom_label'):
+                self.pom_label.config(text=display)
+            elif self.current_timer_mode == "SB" and hasattr(self, 'sb_label'):
+                self.sb_label.config(text=display)
+            elif self.current_timer_mode == "LB" and hasattr(self, 'lb_label'):
+                self.lb_label.config(text=display)
+    #step 003#
+    def setup_and_open_timer(self, mode, duration_seconds, frame_name):
+        # 1. Stop any timer that might be running from before
+        self.pomo_running = False
+
+        # 2. Save the mode ("POM", "SB", or "LB") and the total seconds
+        self.current_timer_mode = mode
+        self.pomo_counter = duration_seconds
+
+        # 3. Refresh the text on the screen using the translator from Step 2
+        self.update_pomo_display_text()
+
+        # 4. Change the screen to the detailed view
+        self.show_frame(frame_name)
 
 
 
