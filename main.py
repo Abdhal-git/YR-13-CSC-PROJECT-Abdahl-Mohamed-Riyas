@@ -326,4 +326,3 @@ class Application:
 root = tk.Tk()
 app = Application(root)
 root.mainloop()
-
