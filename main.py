@@ -322,15 +322,17 @@ class Application:
                 self.pomo_running = False
                 self.leave_pomo_view()
 
-
+    # this function is for starting the timer and breaks , for the start button that  put
     def start_pomo(self):
         if not self.pomo_running:
             self.pomo_running = True
             self.update_pomo_loop()
 
+    # this function is for stopping  the timer and breaks , for the pause button that  put
     def pause_pomo(self):
         self.pomo_running = False
 
+    # this function is for restarting the timer and breaks , for the restart button that  put
     def reset_pomo(self):
         self.pomo_running = False
         if self.current_timer_mode == "POM":
