@@ -284,7 +284,7 @@ class Application:
 
     # --- POMODORO DATA BRIDGE CONFIGURATION ---
     def setup_and_open_timer(self, mode, duration_seconds, frame_name):
-        """Safely parameters incoming selection changes, updates structural mode allocations, and shifts frame context."""
+
         self.pomo_running = False
         self.current_timer_mode = mode
         self.pomo_counter = duration_seconds
@@ -293,7 +293,6 @@ class Application:
 
     # --- buttons for the timer and breaks  ---
     def create_timer_controls(self, frame):
-        """Generates unified, modular action button alignments inside the deep target layout views."""
         cntrl_frame = tk.Frame(frame, bg="black")
         cntrl_frame.pack(pady=10)
 
@@ -306,13 +305,11 @@ class Application:
 
     # --- back to pomodoro button to leave from the pom,sb and lb ---
     def leave_pomo_view(self):
-        """Halts computational thread updates running on sub-layers immediately before view destruction to prevent memory race conditions."""
         self.pomo_running = False
         self.show_frame("open_POM")
 
     # --- CORE COUNTDOWN LOOP ENGINE ENGINE ---
     def update_pomo_loop(self):
-        """Subtracts exact numerical metrics from active counter fields, triggers automated text redraw pipelines, or schedules frame exits on 0."""
         if self.pomo_running:
             if self.pomo_counter > 0:
                 self.pomo_counter -= 1
