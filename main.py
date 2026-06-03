@@ -240,6 +240,27 @@ class Application:
         settings_container.pack(pady=40)
 
 
+        #1 pomodoro slider
+        tk.Label(settings_container, text="Pomodoro Work Time (Minutes)", font=("Arial", 14, "bold"),bg="black", fg="white").pack(pady=5)
+        self.pom_slider = tk.Scale(settings_container, from_=1, to=60, orient="horizontal", length=400,bg="black",fg="white", highlightthickness=0, troughcolor="#333333", activebackground="red")
+        self.pom_slider.set(self.pom_minutes)  # Set slider to current value
+        self.pom_slider.pack(pady=10)
+
+        #2 Short break slider
+        tk.Label(settings_container, text="Short Break Work Time (Minutes)", font=("Arial", 14, "bold"), bg="black",fg="white").pack(pady=5)
+        self.sb_slider = tk.Scale(settings_container, from_=1, to=30, orient="horizontal", length=400, bg="black",fg="white", highlightthickness=0, troughcolor="#333333", activebackground="red")
+        self.sb_slider.set(self.sb_minutes)  # Set slider to current value
+        self.sb_slider.pack(pady=10)
+
+        #3 Long break slider
+
+        # 3. Long Break Slider
+        tk.Label(settings_container, text="Long Break Time (Minutes)", font=("Arial", 14, "bold"), bg="black",fg="white").pack(pady=5)
+        self.lb_slider = tk.Scale(settings_container, from_=1, to=45, orient="horizontal", length=400, bg="black",fg="white", highlightthickness=0, troughcolor="#333333", activebackground="red")
+        self.lb_slider.set(self.lb_minutes)
+        self.lb_slider.pack(pady=10)
+
+
         return frame
 
 
