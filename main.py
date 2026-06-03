@@ -17,6 +17,11 @@ class Application:
         self.pomo_counter = 0  # Stores the remaining time in total seconds
         self.current_timer_mode = None  # Tracks which screen is active: "POM", "SB", or "LB"
 
+        # --- Customizable Durations (in minutes) ---
+        self.pom_minutes = 25
+        self.sb_minutes = 5
+        self.lb_minutes = 10
+
         # Store frames in a dictionary #
         self.frames = {}
 
@@ -62,7 +67,7 @@ class Application:
 
         # Heading for the Home page
         title = tk.Label(frame, text="FOCUS TRACKER ", image=self.logo_img,
-                         compound="right", font=("Impact", 70), bg="black", fg="white")
+                         compound="right", font=("Impact", 70), bg="black", fg="white", )
         title.place(relx=0.5, y=20, anchor="n")
 
         # Navigation Buttons
@@ -314,7 +319,7 @@ class Application:
             if self.pomo_counter > 0:
                 self.pomo_counter -= 1
                 self.update_pomo_display_text()
-                self.root.after(1000, self.update_pomo_loop)
+                self.root.after(10, self.update_pomo_loop)
             else:
                 self.pomo_running = False
                 self.leave_pomo_view()
