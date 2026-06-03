@@ -209,12 +209,12 @@ class Application:
         left_frame = tk.Frame(stopwatch_container, bg="black")
         left_frame.pack(side="left", fill="both", expand=True, padx=10)
         tk.Button(left_frame, image=self.pau_img, bg="black", activebackground="black",
-                  command=self.pause_stopwatch).pack(pady=20)
+                  command=self.start_stopwatch).pack(pady=20)
 
         center_frame = tk.Frame(stopwatch_container, bg="black")
         center_frame.pack(side="left", fill="both", expand=True, padx=10)
         tk.Button(center_frame, image=self.stp_img, bg="black", activebackground="black",
-                  command=self.start_stopwatch).pack(pady=20)
+                  command=self.pause_stopwatch).pack(pady=20)
 
         right_frame = tk.Frame(stopwatch_container, bg="black")
         right_frame.pack(side="left", fill="both", expand=True, padx=10)
