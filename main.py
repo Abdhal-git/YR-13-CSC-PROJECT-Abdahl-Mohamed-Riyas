@@ -105,26 +105,26 @@ class Application:
         #Side_left_Pomodoro_Timer
         left_frame = tk.Frame(Pomodoro_container, bg="black")
         left_frame.pack(side="left", fill="both", expand=True, padx=10)
-        tk.Label(left_frame, text="Pomodoro Timer", font=("Impact", 30), bg="black", fg="#ff4444").pack(pady=30)
+        tk.Label(left_frame, text=f"[ {self.pom_minutes}:00 ]", font=("Impact", 30), bg="black", fg="#ff4444").pack(pady=30)
         tk.Label(left_frame, text="[ 25:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
         tk.Button(left_frame, text="FULL VIEW", font=("Arial", 14, "bold"), bg="red", fg="white",
-                  command=lambda: self.setup_and_open_timer("POM", 25 * 60, "open_POM_DET")).pack(pady=10)
+                  command=lambda: self.setup_and_open_timer("POM", self.pom_minutes * 60, "open_POM_DET")).pack(pady=10)
 
         # Side_center_Short_Break
         center_frame = tk.Frame(Pomodoro_container, bg="black")
         center_frame.pack(side="left", fill="both", expand=True, padx=10)
         tk.Label(center_frame, text="Short Break", font=("Impact", 30), bg="black", fg="#ff4444").pack(pady=30)
-        tk.Label(center_frame, text="[ 05:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
+        tk.Label(center_frame, text=f"[ {self.sb_minutes:02d}:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
         tk.Button(center_frame, text="FULL VIEW", font=("Arial", 14, "bold"), bg="red", fg="white",
-                  command=lambda: self.setup_and_open_timer("SB", 5 * 60, "open_SB_DET")).pack(pady=10)
+                  command=lambda: self.setup_and_open_timer("SB", self.sb_minutes * 60, "open_SB_DET")).pack(pady=10)
 
         #Side_right_Short_Break
         right_frame = tk.Frame(Pomodoro_container, bg="black")
         right_frame.pack(side="left", fill="both", expand=True, padx=10)
         tk.Label(right_frame, text="Long Break ", font=("Impact", 30), bg="black", fg="#ff4444").pack(pady=30)
-        tk.Label(right_frame, text="[ 10:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
+        tk.Label(right_frame, text=f"[ {self.lb_minutes:02d}:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
         tk.Button(right_frame, text="FULL VIEW", font=("Arial", 14, "bold"), bg="red", fg="white",
-                  command=lambda: self.setup_and_open_timer("LB", 10 * 60, "open_LB_DET")).pack(pady=10)
+                  command=lambda: self.setup_and_open_timer("LB", self.lb_minutes * 60, "open_LB_DET")).pack(pady=10)
 
         return frame
 
