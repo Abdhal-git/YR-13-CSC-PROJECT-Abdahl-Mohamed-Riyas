@@ -338,11 +338,11 @@ class Application:
     def reset_pomo(self):
         self.pomo_running = False
         if self.current_timer_mode == "POM":
-            self.pomo_counter = 25 * 60
+            self.pomo_counter = self.pom_minutes * 60
         elif self.current_timer_mode == "SB":
-            self.pomo_counter = 5 * 60
+            self.pomo_counter = self.sb_minutes * 60
         elif self.current_timer_mode == "LB":
-            self.pomo_counter = 10 * 60
+            self.pomo_counter = self.lb_minutes * 60
 
         self.update_pomo_display_text()
 
