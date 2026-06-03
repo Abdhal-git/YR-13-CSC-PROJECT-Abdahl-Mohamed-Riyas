@@ -231,11 +231,15 @@ class Application:
         frame = tk.Frame(self.root, bg="black")
         top_bar = tk.Frame(frame, bg="black")
         top_bar.pack(fill="x", pady=25)
-        tk.Button(top_bar, text="BACK", font=("Impact", 25), bg="black", fg="white", activebackground="red",
-                  activeforeground="white", command=lambda: self.show_frame("open_HME")).pack(side="right", padx=20,
-                                                                                              fill="x")
-        tk.Label(top_bar, text="   SETTINGS", font=("Impact", 50), bg="black", fg="white").pack(side="left", padx=10,
-                                                                                                fill="x")
+        tk.Button(top_bar, text="SAVE & BACK", font=("Impact", 25), bg="black", fg="white", activebackground="red",
+                  activeforeground="white", command=lambda: self.save_settings).pack(side="right", padx=20)
+
+        tk.Label(top_bar, text="   SETTINGS", font=("Impact", 50), bg="black", fg="white").pack(side="left", padx=10)
+
+        settings_container = tk.Frame(frame, bg="black")
+        settings_container.pack(pady=40)
+
+
         return frame
 
 
