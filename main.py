@@ -105,8 +105,8 @@ class Application:
         #Side_left_Pomodoro_Timer
         left_frame = tk.Frame(Pomodoro_container, bg="black")
         left_frame.pack(side="left", fill="both", expand=True, padx=10)
-        tk.Label(left_frame, text=f"[ {self.pom_minutes}:00 ]", font=("Impact", 30), bg="black", fg="#ff4444").pack(pady=30)
-        tk.Label(left_frame, text="[ 25:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
+        tk.Label(left_frame, text="Pomodoro", font=("Impact", 30), bg="black", fg="#ff4444").pack(pady=30)
+        tk.Label(left_frame, text=f"[ {self.pom_minutes}:00 ]", font=("Impact", 60), bg="black", fg="white").pack(pady=10)
         tk.Button(left_frame, text="FULL VIEW", font=("Arial", 14, "bold"), bg="red", fg="white",
                   command=lambda: self.setup_and_open_timer("POM", self.pom_minutes * 60, "open_POM_DET")).pack(pady=10)
 
@@ -228,13 +228,17 @@ class Application:
 
     #SETTINGS
     def open_SET(self):
+
+
         frame = tk.Frame(self.root, bg="black")
         top_bar = tk.Frame(frame, bg="black")
         top_bar.pack(fill="x", pady=25)
         tk.Button(top_bar, text="SAVE & BACK", font=("Impact", 25), bg="black", fg="white", activebackground="red",
-                  activeforeground="white", command=lambda: self.save_settings).pack(side="right", padx=20)
+                  activeforeground="white", command= self.save_settings).pack(side="right", padx=20)
 
         tk.Label(top_bar, text="   SETTINGS", font=("Impact", 50), bg="black", fg="white").pack(side="left", padx=10)
+
+
 
         settings_container = tk.Frame(frame, bg="black")
         settings_container.pack(pady=40)
@@ -261,7 +265,13 @@ class Application:
         self.lb_slider.pack(pady=10)
 
 
+
+
         return frame
+
+
+
+
 
 
     # Functions and Logics for the stopwatch and pomodoro timer
@@ -370,6 +380,29 @@ class Application:
             self.pomo_counter = self.lb_minutes * 60
 
         self.update_pomo_display_text()
+
+    # --- SETTINGS ---
+
+    def save_settings(self):
+        # 1. Pull the new values from the UI sliders
+        self.pom_minutes = self.pom_slider.get()
+        self.sb_minutes = self.sb_slider.get()
+        self.lb_minutes = self.lb_slider.get()
+
+        # 2. Re-initialize the POM frame so it displays the brand new adjusted times
+        p_frame = self.open_POM()
+        self.frames["open_POM"] = p_frame
+        p_frame.grid(row=0, column=0, sticky="nsew")
+
+        # 3. Send the user back to the home screen safely
+        self.show_frame("open_HME")
+
+
+
+
+
+
+
 
 
 #final code to run the program
