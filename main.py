@@ -12,6 +12,8 @@ class Application:
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
 
+
+
         # --- Pomodoro --- Timer Logic State Variables ---
         self.pomo_running = False  # Tracks if the countdown is active (True) or paused (False)
         self.pomo_counter = 0  # Stores the remaining time in total seconds
@@ -65,6 +67,8 @@ class Application:
         pil_set_resized = pil_set.resize((45, 45))
         self.set_img = ImageTk.PhotoImage(pil_set_resized)
 
+
+
         # Heading for the Home page
         title = tk.Label(frame, text="FOCUS TRACKER ", image=self.logo_img,
                          compound="right", font=("Impact", 70), bg="black", fg="white", )
@@ -89,6 +93,8 @@ class Application:
     def open_POM(self):
         frame = tk.Frame(self.root, bg="black")
 
+
+
         # Navigation_POMODORO
         top_bar = tk.Frame(frame, bg="black")
         top_bar.pack(fill="x", pady=25)
@@ -101,6 +107,8 @@ class Application:
 
         Pomodoro_container = tk.Frame(frame, bg="black")
         Pomodoro_container.pack(fill="both", expand=True, padx=20)
+
+
 
         #Side_left_Pomodoro_Timer
         left_frame = tk.Frame(Pomodoro_container, bg="black")
@@ -265,8 +273,6 @@ class Application:
         self.lb_slider.pack(pady=10)
 
 
-
-
         return frame
 
 
@@ -396,6 +402,8 @@ class Application:
 
         # 3. Send the user back to the home screen safely
         self.show_frame("open_HME")
+
+
 
 
 
