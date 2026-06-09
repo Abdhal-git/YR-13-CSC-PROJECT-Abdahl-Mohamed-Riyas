@@ -1,5 +1,6 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+from tkinter import messagebox
 
 
 class Application:
@@ -293,8 +294,9 @@ class Application:
 
             if hasattr(self, 'stopwatch_label') and self.stopwatch_label.winfo_exists():
                 self.stopwatch_label.config(text=display)
-                self.root.after(1000, self.update_stopwatch_label)
+                self.root.after(10, self.update_stopwatch_label)
                 self.counter += 1
+
 
     def start_stopwatch(self):
         if not self.running:
@@ -364,6 +366,7 @@ class Application:
             else:
                 self.pomo_running = False
                 self.leave_pomo_view()
+                messagebox.showinfo("Timer Finished", "Your timer has ended!")
 
     # this function is for starting the timer and breaks , for the start button that  put
     def start_pomo(self):
@@ -390,18 +393,20 @@ class Application:
     # --- SETTINGS ---
 
     def save_settings(self):
-        # 1. Pull the new values from the UI sliders
+
         self.pom_minutes = self.pom_slider.get()
         self.sb_minutes = self.sb_slider.get()
         self.lb_minutes = self.lb_slider.get()
 
-        # 2. Re-initialize the POM frame so it displays the brand new adjusted times
+
         p_frame = self.open_POM()
         self.frames["open_POM"] = p_frame
         p_frame.grid(row=0, column=0, sticky="nsew")
 
-        # 3. Send the user back to the home screen safely
         self.show_frame("open_HME")
+        messagebox.showinfo("Success", "Settings saved successfully!")
+
+
 
 
 
