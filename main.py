@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 from tkinter import messagebox
 
 
+
 class Application:
     def __init__(self, root):
         self.root = root
@@ -294,7 +295,7 @@ class Application:
 
             if hasattr(self, 'stopwatch_label') and self.stopwatch_label.winfo_exists():
                 self.stopwatch_label.config(text=display)
-                self.root.after(10, self.update_stopwatch_label)
+                self.root.after(1000, self.update_stopwatch_label)
                 self.counter += 1
 
 
@@ -362,7 +363,7 @@ class Application:
             if self.pomo_counter > 0:
                 self.pomo_counter -= 1
                 self.update_pomo_display_text()
-                self.root.after(10, self.update_pomo_loop)
+                self.root.after(1000, self.update_pomo_loop)
             else:
                 self.pomo_running = False
                 self.leave_pomo_view()
