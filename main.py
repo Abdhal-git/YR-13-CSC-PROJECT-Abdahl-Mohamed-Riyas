@@ -22,7 +22,7 @@ class Application:
         self.current_timer_mode = None  # Tracks which screen is active: "POM", "SB", or "LB"
 
         # --- Customizable Durations (in minutes) ---
-        self.pom_minutes = 25
+        self.pom_minutes = 30
         self.sb_minutes = 5
         self.lb_minutes = 10
 
@@ -36,7 +36,7 @@ class Application:
             self.frames[I.__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        # Show home first#
+
         self.show_frame("open_HME")
 
     def show_frame(self, page_name):
@@ -262,7 +262,7 @@ class Application:
 
         #2 Short break slider
         tk.Label(settings_container, text="Short Break Work Time (Minutes)", font=("Arial", 14, "bold"), bg="black",fg="white").pack(pady=5)
-        self.sb_slider = tk.Scale(settings_container, from_=1, to=30, orient="horizontal", length=400, bg="black",fg="white", highlightthickness=0, troughcolor="#333333", activebackground="red")
+        self.sb_slider = tk.Scale(settings_container, from_=1, to=10, orient="horizontal", length=400, bg="black",fg="white", highlightthickness=0, troughcolor="#333333", activebackground="red")
         self.sb_slider.set(self.sb_minutes)  # Set slider to current value
         self.sb_slider.pack(pady=10)
 
@@ -270,7 +270,7 @@ class Application:
 
         # 3. Long Break Slider
         tk.Label(settings_container, text="Long Break Time (Minutes)", font=("Arial", 14, "bold"), bg="black",fg="white").pack(pady=5)
-        self.lb_slider = tk.Scale(settings_container, from_=1, to=45, orient="horizontal", length=400, bg="black",fg="white", highlightthickness=0, troughcolor="#333333", activebackground="red")
+        self.lb_slider = tk.Scale(settings_container, from_=10, to=30, orient="horizontal", length=400, bg="black",fg="white", highlightthickness=0, troughcolor="#333333", activebackground="red")
         self.lb_slider.set(self.lb_minutes)
         self.lb_slider.pack(pady=10)
 
@@ -424,3 +424,76 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = Application(root)
     root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
